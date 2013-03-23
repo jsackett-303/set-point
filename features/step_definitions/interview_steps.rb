@@ -14,14 +14,18 @@ Given(/^a location at "(.*?)" with the following thermostats:$/) do |arg1, table
 end
 
 Given(/^I am on the demand response page$/) do
-  pending # express the regexp above with the code you wish you had
+  visit('/')
+  page.should have_content 'Demand Response Page'
 end
 
 Given(/^I set all thermostats to (\d+) within (\d+) miles of Broomfield, CO$/) do |arg1, arg2|
-  pending # express the regexp above with the code you wish you had
+  fill_in('address', with: 'Broomfield, CO')
+  fill_in('setting', with: arg1)
+  fill_in('radius', with: arg2)
+  click_button('Set Thermostats')
 end
 
 Then(/^the thermostats should be set as follows:$/) do |table|
   # table is a Cucumber::Ast::Table
-  pending # express the regexp above with the code you wish you had
+  p table
 end
