@@ -1,0 +1,15 @@
+<table>
+  <tr>
+    <th>Address</th>
+    <th>Number of thermostats</th>
+    <th>Set Point</th>
+  </tr>
+
+<% @locations.each do |location| %>
+  <tr>
+    <td><%= location.address %></td>
+    <td><%= location.thermostats.count %></td>
+    <td><%= location.thermostats.first.set_point if location.thermostats.first.present? %></td>
+  </tr>
+<% end %>
+</table>

@@ -1,25 +1,22 @@
 <h1>Demand Response Page</h1>
 
-<table>
-  <tr>
-    <th>Address</th>
-    <th>Number of thermostats</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<div id="demand_form" style="text-align: right">
+  <%= form_tag('/', :method => :put) do %>
+  <table>
+    <tr>
+      <td>Enter the address of the Demand Response center:</td><td><%= text_field_tag :address %></td>
+    </tr>
+    <tr>
+      <td>Enter the Demand Radius in Miles:</td><td><%= text_field_tag :radius %></td>
+    </tr>
+    <tr>
+      <td>Enter the thermostat Set Point:</td><td><%= text_field_tag :setting %></td>
+    </tr>
+    <tr><td/><td><%= submit_tag 'Set Thermostats' %></td></tr>
+  </table>
+  <% end %>
+</div>
 
-<% @locations.each do |location| %>
-  <tr>
-    <td><%= location.address %></td>
-    <td><%= location.thermostats.count %></td>
-    <td><%= link_to 'Show', location %></td>
-    <td><%= link_to 'Edit', edit_location_path(location) %></td>
-    <td><%= link_to 'Destroy', location, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Location', new_location_path %>
+<div id="response_locations" style="text-align: right">
+  <%= render 'responses' %>
+</div>

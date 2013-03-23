@@ -11,7 +11,18 @@ class LocationsController < ApplicationController
   end
 
   def demand
-    index
+    if params[:commit].blank? # GET
+      @locations = Location.all
+    else # form submit!
+      # find addresses within radius of geo centered address
+      # and set their thermo set points, leaving the rest
+      @locations = Location.all
+    end
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @locations }
+    end
   end
 
   # GET /locations/1
