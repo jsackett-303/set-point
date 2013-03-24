@@ -1,15 +1,17 @@
 <table>
   <tr>
     <th>Address</th>
-    <th>Number of thermostats</th>
+    <th>Serial Number</th>
     <th>Set Point</th>
   </tr>
 
 <% @locations.each do |location| %>
-  <tr>
-    <td><%= location.address %></td>
-    <td><%= location.thermostats.count %></td>
-    <td><%= location.thermostats.first.set_point if location.thermostats.first.present? %></td>
-  </tr>
+      <% location.thermostats.each do |tstat| %>
+          <tr>
+            <td><%= tstat.location.address %></td>
+            <td><%= tstat.serial_number %></td>
+            <td><%= tstat.set_point %></td>
+          </tr>
+      <% end %>
 <% end %>
 </table>

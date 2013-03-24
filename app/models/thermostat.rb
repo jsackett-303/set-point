@@ -1,6 +1,9 @@
 class Thermostat < ActiveRecord::Base
   belongs_to :location
 
+  acts_as_gmappable
+  delegate :address, :latitude, :longitude, :gmaps4rails_address, :to => :location
+
   validates :location_id, presence: true
   validates :set_point, presence: true
   validates :serial_number, presence: true, uniqueness: true
@@ -12,6 +15,18 @@ class Thermostat < ActiveRecord::Base
     tstats.each do |t|
       t.update_attribute(:set_point, setting)
     end
+  end
+
+  def gmaps4rails_title
+    "Set Point #{self.set_point}"
+  end
+
+  def gmaps4rails_infowindow
+    "<h5>Thermostat</h5><p>S/N #{self.serial_number}<br/>Set Point #{self.set_point}</p>"
+  end
+
+  def gmaps
+    true
   end
 
 end

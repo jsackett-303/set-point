@@ -20,11 +20,17 @@ require 'spec_helper'
 
 describe ThermostatsController do
 
+  before(:each) do
+    Location.new do |l|
+      l.address = '123 Main St, Some Town, USA'
+    end.save!
+  end
+
   # This should return the minimal set of attributes required to create a valid
   # Thermostat. As you add validations to Thermostat, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { location_id: 1, serial_number: 12345, set_point: 80  }
+    { location_id: Location.first.id, serial_number: 12345, set_point: 80  }
   end
 
   # This should return the minimal set of values that should be in the session

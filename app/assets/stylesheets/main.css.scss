@@ -8,3 +8,10 @@ input[type="submit"] {
 table {
   @extend .table-hover;
 }
+
+#map img {
+  max-width: none;
+}
+#map label {
+  width: auto; display:inline;
+}

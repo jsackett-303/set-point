@@ -12,13 +12,13 @@ class LocationsController < ApplicationController
 
   def demand
     @center = Location.new do |l|
-      l.address = params[:address] || "Broomfield, CO"
+      l.address = params[:address].present? ? params[:address] : "Broomfield, CO"
       l.geocode
     end
 
     if params[:commit].present? # PUT
-      radius = params[:radius] || 10
-      @locations = Location.near(@center.address.to_s, radius.to_i, :order => :distance)
+      radius = params[:radius].present? ? params[:radius].to_i : 10
+      @locations = Location.near(@center.address.to_s, radius, :order => :distance)
       @locations.collect{|l| l.thermostats.demand_set_point(params[:setting].to_i)} if params[:setting].present?
     else
       @locations = Location.all
