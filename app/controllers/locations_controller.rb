@@ -16,9 +16,10 @@ class LocationsController < ApplicationController
       l.geocode
     end
 
+    @radius = params[:radius].present? ? params[:radius].to_i : 10
+
     if params[:commit].present? # PUT
-      radius = params[:radius].present? ? params[:radius].to_i : 10
-      @locations = Location.near(@center.address.to_s, radius, :order => :distance)
+      @locations = Location.near(@center.address.to_s, @radius, :order => :distance)
       @locations.collect{|l| l.thermostats.demand_set_point(params[:setting].to_i)} if params[:setting].present?
     else
       @locations = Location.all

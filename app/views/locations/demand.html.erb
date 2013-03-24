@@ -17,10 +17,16 @@
   <% end %>
 </div>
 
-<div id="response_locations" style="text-align: right">
-  <%= render 'responses' %>
+<div id="response_locations">
+  <%= addresses_found %>
 </div>
+
 <br/><br/>
 <h3>Current Demand Center: <%= @center.address %></h3>
 
-<%= gmaps4rails(add_markers) %>
+<%= gmaps( 'circles' => {'data' => demand_circle},
+           'markers' => { 'data' => add_markers,
+                             'options' => { 'randomize' => true,
+                                        'max_random_distance' => 1
+                             }
+                       }) %>
