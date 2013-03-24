@@ -22,10 +22,13 @@ Given(/^I set all thermostats to (\d+) within (\d+) miles of Broomfield, CO$/) d
   fill_in('address', with: 'Broomfield, CO')
   fill_in('setting', with: arg1)
   fill_in('radius', with: arg2)
-  click_button('Set Thermostats')
+  click_button('Find Thermostats')
 end
 
 Then(/^the thermostats should be set as follows:$/) do |table|
   # table is a Cucumber::Ast::Table
-  p table
+  table.hashes.each do |h|
+    t = Thermostat.where(serial_number: h['serial_number']).first
+    t.set_point.should eq(h['set_point'].to_i)
+  end
 end

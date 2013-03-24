@@ -11,11 +11,16 @@ class LocationsController < ApplicationController
   end
 
   def demand
-    if params[:commit].blank? # GET
-      @locations = Location.all
-    else # form submit!
-      # find addresses within radius of geo centered address
-      # and set their thermo set points, leaving the rest
+    @center = Location.new do |l|
+      l.address = params[:address] || "Broomfield, CO"
+      l.geocode
+    end
+
+    if params[:commit].present? # PUT
+      radius = params[:radius] || 10
+      @locations = Location.near(@center.address.to_s, radius.to_i, :order => :distance)
+      @locations.collect{|l| l.thermostats.demand_set_point(params[:setting].to_i)} if params[:setting].present?
+    else
       @locations = Location.all
     end
 

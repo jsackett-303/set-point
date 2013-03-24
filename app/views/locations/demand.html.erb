@@ -12,7 +12,7 @@
     <tr>
       <td>Enter the thermostat Set Point:</td><td><%= text_field_tag :setting %></td>
     </tr>
-    <tr><td/><td><%= submit_tag 'Set Thermostats' %></td></tr>
+    <tr><td/><td><%= submit_tag 'Find Thermostats' %></td></tr>
   </table>
   <% end %>
 </div>
@@ -20,3 +20,7 @@
 <div id="response_locations" style="text-align: right">
   <%= render 'responses' %>
 </div>
+<br/><br/>
+<h3>Current Demand Center <%= @center.address %></h3>
+
+<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@center.latitude}%2C#{@center.longitude}" %>

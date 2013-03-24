@@ -6,7 +6,7 @@ gem 'rails', '~> 3.1.12'
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
-
+gem 'geocoder'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -46,5 +46,6 @@ group :development do
     gem 'jasminerice'
     gem 'database_cleaner'
     gem 'cucumber-rails', :require => false
+    gem 'spork'
   end
 end
