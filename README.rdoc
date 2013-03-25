@@ -1,0 +1,11 @@
+== Interview Application
+An application to control the set point of a thermostat or thermostats within a
+specified radius of geographic location
+
+A User is presented with a 'Demand Response Page' with a form to set the center of a demand circle, the radius of the
+circle, and the thermostat set point.  This will effect temperature changes on all thermostats with the circle radius.
+
+The applications uses geocoder and gmap4rails gems to handle the location search and map view.
+
+==TODO
+Fix CRUD interface for adding Thermostats to a Location

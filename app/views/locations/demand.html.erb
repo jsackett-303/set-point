@@ -24,9 +24,4 @@
 <br/><br/>
 <h3>Current Demand Center: <%= @center.address %></h3>
 
-<%= gmaps( 'circles' => {'data' => demand_circle},
-           'markers' => { 'data' => add_markers,
-                             'options' => { 'randomize' => true,
-                                        'max_random_distance' => 1
-                             }
-                       }) %>
+<%= gmaps(hash_for_gmaps) %>

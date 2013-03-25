@@ -20,4 +20,12 @@ module LocationsHelper
     render 'responses'
   end
 
+  def hash_for_gmaps
+    { 'circles' => {'data' => demand_circle},
+      'markers' => { 'data' => add_markers,
+                     'options' => { 'randomize' => true,
+                                    'max_random_distance' => 1
+                     }
+      }}
+  end
 end
